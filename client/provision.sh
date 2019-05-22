@@ -9,6 +9,13 @@
 ############################################################################### 
 
 
+
+# check for root
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
+
 source config.sh
 
 LOKIHOME=$(pwd)
@@ -17,14 +24,6 @@ sed -i "s|^LOKIHOME.*$|LOKIHOME=$(pwd)|g" config.sh
 
 MYNAME=$(dmidecode -s system-serial-number)
 $ECHO $MYNAME > $LOKIHOME/SERIAL
-
-# check for root
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 
-   exit 1
-fi
-
-
 
 # check for variables
 ## C2 Server
@@ -36,14 +35,18 @@ if [ -z "$DESTEMAIL" ]; then
 	echo "Destination Email Not Specified"
 	exit 1	
 fi
-if [ -z "C2PROTO" ]; then
+if [ -z "$C2PROTO" ]; then
 	echo "C2 Protocol Not Specified"
 	exit 1
 fi
 ## C2 Username
+if [ -z $C2USR ]; then
+	echo "C2 User Not Specified"
+	exit 1
+fi
 
 # Set permissions on $LOKIHOME
-$CHOWN .$C2USER $LOKIHOME -R
+$CHOWN $C2USER.$C2USER $LOKIHOME -R
 $CHMOD g+wr $LOKIHOME -R
 
 # Verify Network Connectivity and wait until we get it.  We can't do anything until
