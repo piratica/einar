@@ -41,7 +41,7 @@ if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
 		#      overwrite the current file with the new file and run it
 		$MV $LOKIHOME/$MYNAME-command.txt $LOKIHOME/$MYNAME-current.sh
 		$CHMOD +x $$LOKIHOME/$MYNAME-current.sh
-		./$LOKIHOME/$MYNAME-current.sh
+		$LOKIHOME/$MYNAME-current.sh
 		else
 		$LOG "No Change in Command"
 		# If they are the same, do nothing
