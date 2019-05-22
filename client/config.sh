@@ -7,7 +7,7 @@ C2USER=""			# This is a local, non-privileged user on the device that will log i
 SSHPORT=			# The port you'll use to connect to SSH on C2
 PROXYPORT=2223		# The port you'll use for the reverse SSH tunnel
 SMTPPORT=2525		# We'll tunnel SSH from C2 to here so that we can relay mail
-LOKIHOME=""			# where, on the device, does einar live
+LOKIHOME=""			# Leave This Alone, it will get updated during provisioning
 COMMANDFILE=$MYNAME
 CALLHOMEFREQ=		# How frequently, in minutes, do we check for commands
 
