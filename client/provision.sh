@@ -10,10 +10,13 @@
 
 
 source config.sh
+
+LOKIHOME=$(pwd)
+# sed -i 's/^LOKIHOME="*"/LOKIHOME="$LOKIHOME"/g' config.sh
+
+
 MYNAME=$(dmidecode -s system-serial-number)
 $ECHO $MYNAME > $LOKIHOME/SERIAL
-
-
 
 # check for root
 if [[ $EUID -ne 0 ]]; then
@@ -21,8 +24,7 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-LOKIHOME=$(pwd)
-sed -i 's/^LOKIHOME="*"/LOKIHOME="$LOKIHOME"/g' config.sh
+
 
 # check for variables
 ## C2 Server
@@ -88,7 +90,7 @@ fi
 # check for cron job to check in and, if it isn't there, add it
 $CRONTAB -u $C2USER -l | grep $MYNAME 
 if [ $? == 1 ]; then 
-  $LOG "Adding Crontab"
+  $LOG "No crontab found, Adding Crontab"
   echo "*/$CALLHOMEFREQ  * * * * $LOKIHOME/$MYNAME-cron.sh > /dev/null 2>&1" >> /var/spool/cron/crontabs/$C2USER
   $CHMOD 600 /var/spool/cron/crontabs/$C2USER
 fi
