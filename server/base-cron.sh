@@ -49,8 +49,8 @@ if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
 	else
 		$LOG "No previous command file.  Moving this one to command and running"
 		$MV $LOKIHOME/$MYNAME-command.txt $LOKIHOME/$MYNAME-current.sh
-		$CHMOD +x $$LOKIHOME/$MYNAME-current.sh
-		./$LOKIHOME/$MYNAME-current.sh
+		$CHMOD +x $LOKIHOME/$MYNAME-current.sh
+		$LOKIHOME/$MYNAME-current.sh
 	fi 
 else
     echo "LokiPro Nothing found"
