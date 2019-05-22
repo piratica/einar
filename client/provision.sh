@@ -88,7 +88,8 @@ if [ $? == 1 ]; then
 fi
 
 $ECHO $LOKIHOME/onboot.sh >> /etc/rc.local
-$CHMOD +X /etc/rc.local 
+$CHMOD +x /etc/rc.local 
+$CHMOD +x $LOKIHOME/onboot.sh
 # We should have everything setup now.  
 $LOKIHOME/onboot.sh
 
