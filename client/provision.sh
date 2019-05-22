@@ -10,7 +10,8 @@
 
 
 source config.sh
-dmidecode -s system-serial-number > $LOKIHOME/SERIAL
+MYNAME=$(dmidecode -s system-serial-number)
+$ECHO $MYNAME > $LOKIHOME/SERIAL
 
 
 
