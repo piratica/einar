@@ -40,7 +40,7 @@ if [ -z "$C2PROTO" ]; then
 	exit 1
 fi
 ## C2 Username
-if [ -z $C2USR ]; then
+if [ -z "$C2USER" ]; then
 	echo "C2 User Not Specified"
 	exit 1
 fi
