@@ -20,13 +20,14 @@ if [ -f "$LOKIHOME/$MYNAME" ]; then
 
         # Create a hash of the file that we downloaded to compare to the hash that we downloaded
     sha256sum $MYNAME > $LOKIHOME/$MYNAME.check
-	if [ $(diff $MYNAME.check $MYHAME.hash) ]; then
+	$DIFF $MYNAME.hash $MYNAME.check
+	if [ $? == 1 ]; then
 		$LOG "[ALERT] Command File Download did not match hash"
 	else
 		$ECHO "Hash Match, Moving On"
-		mv $MYNAME $MYNAME-command.txt
-		rm $MYNAME.check
-		rm $MYNAME.hash 
+		mv $LOKIHOME/$MYNAME $LOKIHOME/$MYNAME-command.txt
+		rm $LOKIHOME/$MYNAME.check
+		rm $LOKIHOME/$MYNAME.hash 
 	fi 
 else
     $ECHO "No $LOKIHOME/$MYNAME-command.txt found"
