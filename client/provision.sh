@@ -21,6 +21,9 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+LOKIHOME=$(pwd)
+sed -i 's/^LOKIHOME*/LOKIHOME=$LOKIHOME/'
+
 # check for variables
 ## C2 Server
 if [ -z "$C2" ]; then
