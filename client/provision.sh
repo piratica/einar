@@ -58,7 +58,7 @@ until curl -Is $C2PROTO$C2
   done
 $LOG "Network Up"
 
-
+ 
 # Check for the Loki Home Directory
 if ! [ -d "$LOKIHOME" ]; then 
 	$LOG "Creating LOKIHOME ($LOKIHOME)"
