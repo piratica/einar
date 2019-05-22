@@ -54,6 +54,7 @@ if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
 		$LOKIHOME/$MYNAME-current.sh
 		else
 		$LOG "No Change in Command"
+		$ECHO "This was the same file, doing nothing"
 		# If they are the same, do nothing
 		fi
 	else
