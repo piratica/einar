@@ -15,10 +15,10 @@ dmidecode -s system-serial-number > $LOKIHOME/SERIAL
 
 
 # check for root
-#if [[ $EUID -ne 0 ]]; then
-#   echo "This script must be run as root" 
-#   exit 1
-#fi
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
 
 # check for variables
 ## C2 Server
