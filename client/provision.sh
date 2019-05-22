@@ -22,7 +22,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 LOKIHOME=$(pwd)
-sed -i 's/^LOKIHOME="*"/LOKIHOME="$LOKIHOME"/g'
+sed -i 's/^LOKIHOME="*"/LOKIHOME="$LOKIHOME"/g' config.sh
 
 # check for variables
 ## C2 Server
