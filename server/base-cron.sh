@@ -50,7 +50,7 @@ if [ -f "$LOKIHOME/$MYNAME-command.txt" ]; then
 		
 		$ECHO "Moving $CHMOD +x $$LOKIHOME/$MYNAME-current.sh"
 		
-		$CHMOD +x $$LOKIHOME/$MYNAME-current.sh
+		$CHMOD +x $LOKIHOME/$MYNAME-current.sh
 		$LOKIHOME/$MYNAME-current.sh
 		else
 		$LOG "No Change in Command"
