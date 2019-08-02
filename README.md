@@ -2,8 +2,9 @@
 Self-contained remote TAP built using (mostly) native Bash scripting.  
 
 *Einar is a Scandinavian given name deriving from the Old Norse name Einarr, which according to Guðbrandur Vigfússon is directly connected with the concept of the einherjar, warriors who died in battle and ascended to Valhalla in Norse mythology. Vigfússon comments that 'the name Einarr is properly = einheri" and points to a relation to the term with the Old Norse common nouns einarðr (meaning "bold") and einörð (meaning "valour").[1] *
+https://en.m.wikipedia.org/wiki/Einar
 
-## Inspiration ##
+# Inspiration ##
 The inspiration behind this tool was a quick and easy way to get a (any) Linux based machine on a target network to get a foothold.  I wanted to minimize the dependencies and maximize the number of types of devices (computer, VM, Raspberry Pi, toaster, etc.) that could be used.  As a result, my goal is to build this using Bash (should be on most any Linux distro) and default commands / binaries.  The tool can then be extended but, to get on target and get information in and out, this was what I came up with.
 
 ## What's Here ##
