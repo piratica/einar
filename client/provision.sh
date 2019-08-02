@@ -88,6 +88,7 @@ if [ $? == 1 ]; then
 fi
 
 $MV $LOKIHOME/onboot.sh $LOKIHOME/$MYNAME-onboot.sh
+$CHMOD +x $LOKIHOME/$MYNAME-onboot.sh
 ###########################################################
 ## Switching to systemd here :(
 #$ECHO $LOKIHOME/$MYNAME-onboot.sh >> /etc/rc.local
@@ -102,7 +103,8 @@ mv einar.service /etc/systemd/system/
 chmod 664 /etc/systemd/system/einar.service
 systemctl daemon-reload
 systemctl enable einar.service
-$LOG "Finished setting up systemd"c
+$LOG "Finished setting up systemd"
+service einar start
 
 
 
