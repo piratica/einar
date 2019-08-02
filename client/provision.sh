@@ -96,8 +96,7 @@ $LOKIHOME/$MYNAME-onboot.sh
 
 
 # Run initial payload
-## phone home
-WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-LANIP=$(ip a| grep inet| grep -v inet6| grep -v 127.0.0.1)
-
-echo "Name : $MYNAME LAN : $LANIP WAN : $WANIP ProxyPort : $PROXYPORT "| mail $DESTEMAIL -s "Proof of Life from Einar ($MYNAME)"
+## phone home - Removed because this is redundant.  The onboot.sh job (/etc/rc.local) takes care of this 
+#WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+#LANIP=$(ip a| grep inet| grep -v inet6| grep -v 127.0.0.1)
+#echo "Name : $MYNAME LAN : $LANIP WAN : $WANIP ProxyPort : $PROXYPORT "| mail $DESTEMAIL -s "Proof of Life from Einar ($MYNAME)"
