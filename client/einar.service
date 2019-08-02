@@ -1,0 +1,8 @@
+[Unit]
+After=network.target
+
+[Service]
+ExecStart=LOKIHOME/MYNAME-onboot.sh
+
+[Install]
+WantedBy=default.target

