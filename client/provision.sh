@@ -100,4 +100,4 @@ $LOKIHOME/$MYNAME-onboot.sh
 WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 LANIP=$(ip a| grep inet| grep -v inet6| grep -v 127.0.0.1)
 
-mail -s "Proof of Life $MYNAME / $WANIP / Port $PROXYPORT" $DESTEMAIL
+echo "Name : $MYNAME LAN : $LANIP WAN : $WANIP ProxyPort : $PROXYPORT "| mail $DESTEMAIL -s "Proof of Life from Einar ($MYNAME)"
