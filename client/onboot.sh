@@ -23,6 +23,7 @@ if [ $? == 1 ]; then
 
 
 		WAN_IP=$(curl ifconfig.me)
+		LANIP=$(ip a| grep inet| grep -v inet6| grep -v 127.0.0.1)
 		SERIAL=$(dmidecode -s system-serial-number)
 		UPTIME=$(uptime)
 
