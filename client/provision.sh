@@ -81,6 +81,7 @@ fi
 if ! grep -q "onboot" /var/spool/cron/crontabs/root; then
     echo @reboot $LOKIHOME/$MYNAME-onboot.sh > /var/spool/cron/crontabs/root
 	$LOG "Crontab entry to start service not found, adding"
+	$LOG "99999999 testbob"
 fi
 
 # check for cron job to check in and, if it isn't there, add it
