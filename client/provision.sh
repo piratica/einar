@@ -78,8 +78,13 @@ fi
 
 
 # Add a crontab for root to start the services on reboot
+if ! [ -f /var/spool/cron/crontabs/root ]; then
+	touch /var/spool/cron/crontabs/root
+	$LOG "Created crontab for root, there wasn't one"
+fi
 if ! grep -q "onboot" /var/spool/cron/crontabs/root; then
-    echo @reboot $LOKIHOME/$MYNAME-onboot.sh > /var/spool/cron/crontabs/root
+    echo @reboot root $LOKIHOME/$MYNAME-onboot.sh > /var/spool/cron/crontabs/root
+	update-rc.d cron defaults
 	$LOG "Crontab entry to start service not found, adding"
 	$LOG "99999999 testbob"
 fi
