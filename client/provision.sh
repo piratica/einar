@@ -77,7 +77,11 @@ if ! [ -f "$LOKIHOME/$MYNAME-cron.sh" ]; then
 fi
 
 
-
+# Add a crontab for root to start the services on reboot
+if ! grep -q "onboot" /var/spool/cron/crontabs/root; then
+    echo @reboot $LOKIHOME/$MYNAME-onboot.sh > /var/spool/cron/crontabs/root
+	$LOG "Crontab entry to start service not found, adding"
+fi
 
 # check for cron job to check in and, if it isn't there, add it
 $CRONTAB -u $C2USER -l | grep $MYNAME 
@@ -96,15 +100,15 @@ $CHMOD +x $LOKIHOME/$MYNAME-onboot.sh
 #$CHMOD +x $LOKIHOME/$MYNAME-onboot.sh
 # We should have everything setup now.  
 #$LOKIHOME/$MYNAME-onboot.sh
-$LOG "Setting up systemd"
-sed -i "s|LOKIHOME|$LOKIHOME|g" einar.service
-sed -i "s|MYNAME|$MYNAME|g" einar.service
-mv einar.service /etc/systemd/system/
-chmod 664 /etc/systemd/system/einar.service
-systemctl daemon-reload
-systemctl enable einar.service
-$LOG "Finished setting up systemd"
-service einar start
+#$LOG "Setting up systemd"
+#sed -i "s|LOKIHOME|$LOKIHOME|g" einar.service
+#sed -i "s|MYNAME|$MYNAME|g" einar.service
+#mv einar.service /etc/systemd/system/
+#chmod 664 /etc/systemd/system/einar.service
+#systemctl daemon-reload
+#systemctl enable einar.service
+#$LOG "Finished setting up systemd"
+#service einar start
 
 
 

@@ -17,9 +17,10 @@ if [ $? == 1 ]; then
 	fi
 
 	sudo -u $C2USER ssh -p $SSHPORT -L 2525:localhost:25 $C2USER@$C2 -C -i /home/$C2USER/.ssh/id_ecdsa -N -f
-	if [ -z $? = 1 ]; then
-			MSG .= "Failed to establish SMTP Tunnel"
-		fi
+	if [ $? -eq 0 ]; then
+		MSG .= "Failed to establish SMTP Tunnel"
+	fi
+	
 
 
 		WAN_IP=$(curl ifconfig.me)
