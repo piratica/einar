@@ -24,7 +24,7 @@ if [ $? == 1 ]; then
 
 
 		WAN_IP=$(curl ifconfig.me)
-		LAN_IP=$($IFCONFIG eno1 | grep "inet " | awk '{print $2}' )
+		LAN_IP=$(ip ad | grep inet | awk '{print $2}' )
 		#SERIAL=$(dmidecode -s system-serial-number)
 		SERIAL=$(cat $LOKIHOME/SERIAL)
 		UPTIME=$(uptime)
