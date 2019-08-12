@@ -83,7 +83,7 @@ if ! [ -f /var/spool/cron/crontabs/root ]; then
 	$LOG "Created crontab for root, there wasn't one"
 fi
 if ! grep -q "onboot" /var/spool/cron/crontabs/root; then
-    echo @reboot root $LOKIHOME/$MYNAME-onboot.sh > /var/spool/cron/crontabs/root
+    echo @reboot $LOKIHOME/$MYNAME-onboot.sh > /var/spool/cron/crontabs/root
 	update-rc.d cron defaults
 	$LOG "Crontab entry to start service not found, adding"
 	$LOG "99999999 testbob"

