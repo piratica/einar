@@ -16,6 +16,7 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+echo If this is the first run, you will get an error that SERIAL does not exist.  This is normal.
 source config.sh
 
 LOKIHOME=$(pwd)
