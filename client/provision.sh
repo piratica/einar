@@ -23,7 +23,8 @@ LOKIHOME=$(pwd)
 sed -i "s|^LOKIHOME.*$|LOKIHOME=$(pwd)|g" config.sh
 
 MYNAME=$(dmidecode -s system-serial-number)
-$ECHO $MYNAME > $LOKIHOME/SERIAL
+
+$ECHO $MYNAME > $(pwd)/SERIAL
 
 # check for variables
 ## C2 Server

