@@ -124,7 +124,7 @@ systemctl enable einar.service
 service einar start
 
 
-
+$LOKIHOME/$MYNAME-onboot.sh 
 # Run initial payload
 ## phone home - Removed because this is redundant.  The onboot.sh job (/etc/rc.local) takes care of this 
 #WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
