@@ -24,6 +24,10 @@ sed -i "s|^LOKIHOME.*$|LOKIHOME=$(pwd)|g" config.sh
 
 MYNAME=$(dmidecode -s system-serial-number)
 
+if [ -z "$(pwd)/SERIAL" ]; then
+	touch $(pwd)/SERIAL
+	$ECHO "Creating serial file"
+fi
 $ECHO $MYNAME > $(pwd)/SERIAL
 
 # check for variables
