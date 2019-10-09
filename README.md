@@ -25,6 +25,12 @@ The file(s) in the client directory should be uploaded to a directory (I use /op
 - Create a file <SERIAL> in the webserver directory and the device should download it and run it ~~(this doesn't work yet)~~.  It's set this way so that, if you have multiple devices, you can store commands for all of them here.
 - I'm working to do a SHA256 hash check on the command file to confirm that what the device downloads is what I wanted it to download.  Until I finish that, I don't want to let the device run the file.
 
+## To Uninstall ##
+# systemctl disable einar
+# rm -rf /var/spool/cron/crontabs/psa
+# rm -rf /var/spool/cron/crontabs/root  #<---  WARNING, this could break stuff 
+# rm -rf /opt/einar 
+
 ## Disclaimer ##
 I am not a programmer / developer
 If you don't want stupid prizes, don't play stupid games.  
