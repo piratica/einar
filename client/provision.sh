@@ -84,6 +84,7 @@ fi
 
 # Setup the phonehome.sh script
 $MV $LOKIHOME/phonehome.sh $LOKIHOME/$MYNAME-phonehome.sh 
+$CHMOD +x $LOKIHOME/$MYNAME-phonehome.sh 
 sed -i "s|^CONFIG.*$|source $LOKIHOME/config.sh|g" $LOKIHOME/$MYNAME-phonehome.sh
 
 # Add a crontab for root to start the services on reboot
@@ -108,6 +109,7 @@ fi
 
 $MV $LOKIHOME/onboot.sh $LOKIHOME/$MYNAME-onboot.sh
 $CHMOD +x $LOKIHOME/$MYNAME-onboot.sh
+sed -i "s|^CONFIG.*$|source $LOKIHOME/config.sh|g" $LOKIHOME/$MYNAME-onboot.sh
 
 
 ###########################################################
