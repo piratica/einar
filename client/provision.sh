@@ -79,9 +79,12 @@ if ! [ -f "$LOKIHOME/$MYNAME-cron.sh" ]; then
 	$CHMOD +x $LOKIHOME/$MYNAME-cron.sh
 	
 	# Now, update the CONFIG line to point to the correct config
-	sed -i "s|^CONFIG.*$|source $LOKIHOME/config.sh|g" $LOKIHOME/$MYNAME-cron.sh
+	sed -i "s|^CONFIG.*$|source $LOKIHOME/config.sh|g" $LOKIHOME/$MYNAME-cron.sh	
 fi
 
+# Setup the phonehome.sh script
+$MV $LOKIHOME/phonehome.sh $LOKIHOME/$MYNAME-phonehome.sh 
+sed -i "s|^CONFIG.*$|source $LOKIHOME/config.sh|g" $LOKIHOME/$MYNAME-phonehome.sh
 
 # Add a crontab for root to start the services on reboot
 if ! [ -f /var/spool/cron/crontabs/root ]; then
