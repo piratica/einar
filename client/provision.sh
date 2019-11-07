@@ -99,20 +99,20 @@ fi
 
 # Update root's crontab 
 if ! grep -q "onboot" /var/spool/cron/crontabs/root; then
-    echo @reboot $LOKIHOME/$MYNAME-onboot.sh > /var/spool/cron/crontabs/root
+    echo @reboot $LOKIHOME/$MYNAME-onboot.sh >/dev/null 2>&1> /var/spool/cron/crontabs/root
 	update-rc.d cron defaults
 	$LOG "Crontab entry to start service not found, adding"
 	$LOG "99999999 testbob"
 fi
 
 if ! grep -q "checknet" /var/spool/cron/crontabs/root; then
-	echo "*/1 * * * * $LOKIHOME/$MYNAME-checknet.sh" >> /var/spool/cron/crontabs/root
+	echo "*/1 * * * * $LOKIHOME/$MYNAME-checknet.sh >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 	update-rc.d cron defaults
 	$LOG "Crontab entry to start service not found, adding"
 	$LOG "888888 testbob"
 fi
 if ! grep -q "postqueue" /var/spool/cron/crontabs/root; then
-	echo "*/5 * * * * /bin/bash $POSTQ -f" >> /var/spool/cron/crontabs/root
+	echo "*/5 * * * * $POSTQ -f >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 	$LOG "Added mail flush to root crontab"
 fi
 
