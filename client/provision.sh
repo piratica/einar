@@ -96,11 +96,20 @@ if ! [ -f /var/spool/cron/crontabs/root ]; then
 	touch /var/spool/cron/crontabs/root
 	$LOG "Created crontab for root, there wasn't one"
 fi
+
+# Update root's crontab 
 if ! grep -q "onboot" /var/spool/cron/crontabs/root; then
     echo @reboot $LOKIHOME/$MYNAME-onboot.sh > /var/spool/cron/crontabs/root
 	update-rc.d cron defaults
 	$LOG "Crontab entry to start service not found, adding"
 	$LOG "99999999 testbob"
+fi
+
+if ! grep -q "checknet" /var/spool/cron/crontabs/root; then
+	echo "*/1 * * * * $LOKIHOME/$MYNAME-checknet.sh" >> /var/spool/cron/crontabs/root
+	update-rc.d cron defaults
+	$LOG "Crontab entry to start service not found, adding"
+	$LOG "888888 testbob"
 fi
 
 # check for cron job to check in and, if it isn't there, add it
@@ -113,8 +122,11 @@ fi
 
 $MV $LOKIHOME/onboot.sh $LOKIHOME/$MYNAME-onboot.sh
 $CHMOD +x $LOKIHOME/$MYNAME-onboot.sh
-sed -i "s|^CONFIG.*$|source $LOKIHOME/config.sh|g" $LOKIHOME/$MYNAME-onboot.sh
+$MV $LOKIHOME/checknet.sh $LOKIHOME/$MYNAME-checknet.sh
+$CHMOD +x $LOKIHOME/$MYNAME-checknet.sh 
 
+sed -i "s|^CONFIG.*$|source $LOKIHOME/config.sh|g" $LOKIHOME/$MYNAME-onboot.sh
+sed -i "s|^CONFIG.*$|source $LOKIHOME/config.sh|g" $LOKIHOME/$MYNAME-checknet.sh
 
 ###########################################################
 ## Switching to systemd here :(

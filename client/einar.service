@@ -1,8 +1,12 @@
 [Unit]
-After=network.target
+Description=Einar service
 
 [Service]
+Type=simple
 ExecStart=LOKIHOME/MYNAME-onboot.sh
 
 [Install]
+WantedBy=network-online.target
+
+[Unit]
 WantedBy=default.target
