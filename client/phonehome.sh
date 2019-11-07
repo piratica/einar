@@ -20,11 +20,7 @@ SERIAL=$(cat $LOKIHOME/SERIAL)
 UPTIME=$(uptime)
 MAC=$(/sbin/ifconfig eno1 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
 
-if [ -n "$FRIENDLY_NAME" ]; then
-	$$LOG "Friendly name already set"
-else
-	$FRIENDLY_NAME = $SERIAL
-fi
+
 
 $ECHO "Details for $MYNAME" > $LOKIHOME/netinfo 
 $ECHO "LAN IP = $LAN_IP " >> $LOKIHOME/netinfo
