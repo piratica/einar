@@ -26,10 +26,10 @@ The file(s) in the client directory should be uploaded to a directory (I use /op
 - I'm working to do a SHA256 hash check on the command file to confirm that what the device downloads is what I wanted it to download.  Until I finish that, I don't want to let the device run the file.
 
 ## To Uninstall ##
-# systemctl disable einar
-# rm -rf /var/spool/cron/crontabs/psa
-# rm -rf /var/spool/cron/crontabs/root  #<---  WARNING, this could break stuff 
-# rm -rf /opt/einar 
+- systemctl disable einar
+- rm -rf /var/spool/cron/crontabs/psa
+- rm -rf /var/spool/cron/crontabs/root  #<---  WARNING, this could break stuff 
+- rm -rf /opt/einar 
 
 ## Disclaimer ##
 I am not a programmer / developer

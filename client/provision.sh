@@ -87,6 +87,10 @@ $MV $LOKIHOME/phonehome.sh $LOKIHOME/$MYNAME-phonehome.sh
 $CHMOD +x $LOKIHOME/$MYNAME-phonehome.sh 
 sed -i "s|^CONFIG.*$|source $LOKIHOME/config.sh|g" $LOKIHOME/$MYNAME-phonehome.sh
 
+# Setup the uninstall.sh script
+$CHMOD +x $LOKIHOME/uninstall.sh 
+sed -i "s|^CONFIG.*$|source $LOKIHOME/config.sh|g" $LOKIHOME/uninstall.sh 
+
 # Add a crontab for root to start the services on reboot
 if ! [ -f /var/spool/cron/crontabs/root ]; then
 	touch /var/spool/cron/crontabs/root

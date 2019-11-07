@@ -14,7 +14,7 @@ COMMANDFILE=$MYNAME
 CALLHOMEFREQ=2		# How frequently, in minutes, do we check for commands
 
 # Check for necessary commands and create variables for them (or errors if they aren't there)
-MYNAME=$(cat $LOKIHOME/SERIAL)
+
 CHMOD=$(which chmod)
 CHOWN=$(which chown)
 CRONTAB=$(which crontab)
@@ -26,11 +26,13 @@ KILL=$(which kill)
 LOG=$(which logger)
 MKDIR=$(which mkdir)
 MV=$(which mv)
+MYNAME=$(cat $LOKIHOME/SERIAL)
 NC=$(which nc)
 NMAP=$(which nmap)
 PIDOF=$(which pidof)
 RM=$(which rm)
 SSH=$(which ssh)
 SUDO=$(which sudo)
+SYSTEMCTL=$(which systemctl)
 TOUCH=$(which touch)
 WGET=$(which wget)
