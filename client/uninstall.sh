@@ -10,6 +10,7 @@
 
 CONFIG
 $SYSTEMCTL disable einar
+$SYSTEMCTL daemon-reload
 $RM -rf /var/spool/cron/crontabs/psa
 $SED -i '/-onboot.sh/d' /var/spool/cron/crontabs/root
 
