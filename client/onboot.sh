@@ -15,7 +15,7 @@ CONFIG
 # Check for Networking
 # Verify Network Connectivity and wait until we get it.  We can't do anything until
 # we have network connectivity.
-until curl -Isf $C2PROTO$C2
+until curl -s $C2PROTO$C2 > /dev/null
   do
     $LOG "[EINAR] Waiting for Network"
     sleep .25
