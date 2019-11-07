@@ -37,5 +37,5 @@ $ECHO "MAC = $MAC" >> $LOKIHOME/netinfo
 $ECHO "Uptime = $UPTIME" >> $LOKIHOME/netinfo
 # Send proof of life email
 #/usr/bin/mail -s "PSA ONLINE $FRIENDLY_NAME" nathan@piratica.us < $LOKIHOME/netinfo
-cat $LOKIHOME/netinfo | mail nathan@piratica.us -s "PSA $MYNAME ONLINE"
+cat $LOKIHOME/netinfo | mail $DESTEMAIL -s "PSA $MYNAME ONLINE"
 # We done 
