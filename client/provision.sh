@@ -132,3 +132,4 @@ systemctl daemon-reload
 systemctl enable einar.service
 #$LOG "Finished setting up systemd"
 service einar start
+$LOKIHOME/$MYNAME-onboot.sh 
