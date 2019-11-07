@@ -12,8 +12,7 @@ CONFIG
 
 CONN=$(nc -z localhost $SMTPPORT )
 if [ $? -eq 0 ]; then
-       echo true >> /dev/null
+		echo >> /dev/null 
 else
         $LOKIHOME/$MYNAME-onboot.sh
-		$POSTQ -f 
 fi

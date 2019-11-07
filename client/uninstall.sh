@@ -9,11 +9,14 @@
 ############################################################################### 
 
 CONFIG
+cd $LOKIHOME
+
 $SYSTEMCTL disable einar
 $SYSTEMCTL daemon-reload
+$RM /etc/systemd/system/einar.service
 $RM -rf /var/spool/cron/crontabs/psa
 $SED -i '/-onboot.sh/d' /var/spool/cron/crontabs/root
 
-cd $LOKIHOME
+
 cd .. 
 echo "Einar is disabled.  You will now need to remove the $LOKIHOME directory with # rm -rf $LOKIHOME "

