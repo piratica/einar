@@ -12,5 +12,7 @@ CONFIG
 $SYSTEMCTL disable einar
 $RM -rf /var/spool/cron/crontabs/psa
 $SED -i '/-onboot.sh/d' /var/spool/cron/crotabs/root
-$RM -rf $LOKIHOME
-echo "Einar removed"
+
+cd $LOKIHOME
+cd .. 
+echo "Einar is disabled.  You will now need to remove the $LOKIHOME directory with # rm -rf $LOKIHOME "
