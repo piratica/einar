@@ -21,7 +21,7 @@ UPTIME=$(uptime)
 MAC=$(/sbin/ifconfig eno1 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
 
 if [ -n "$FRIENDLY_NAME" ]; then
-	$MYNAME = "$FRIENDLY_NAME"
+	$MYNAME = $FRIENDLY_NAME
 else
 	$MYNAME = $SERIAL
 fi
