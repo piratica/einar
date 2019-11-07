@@ -20,7 +20,14 @@ SERIAL=$(cat /opt/einar/client/SERIAL)
 UPTIME=$(uptime)
 MAC=$(/sbin/ifconfig eno1 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
 
-$ECHO "LAN IP = $LAN_IP " > /opt/einar/client/netinfo
+if [ -n "$FRIENDLY_NAME" ]; then
+	$MYNAME = "$FRIENDLY_NAME"
+else
+	$MYNAME = $SERIAL
+fi
+
+$ECHO "Details for $MYNAME" > /opt/einar/client/netinfo 
+$ECHO "LAN IP = $LAN_IP " >> /opt/einar/client/netinfo
 $ECHO "WAN IP = $WAN_IP" >> /opt/einar/client/netinfo
 $ECHO "SSH Proxy Port = $PROXYPORT" >> /opt/einar/client/netinfo 
 $ECHO $MSG >>  /opt/einar/client/netinfo
@@ -29,5 +36,6 @@ $ECHO "Serial = $SERIAL" >> /opt/einar/client/netinfo
 $ECHO "MAC = $MAC" >> /opt/einar/client/netinfo
 $ECHO "Uptime = $UPTIME" >> /opt/einar/client/netinfo
 # Send proof of life email
-/usr/bin/mail -s "PSA ONLINE" nathan@piratica.us < /opt/einar/client/netinfo
+#/usr/bin/mail -s "PSA ONLINE $FRIENDLY_NAME" nathan@piratica.us < /opt/einar/client/netinfo
+cat /opt/einar/client/netinfo | mail nathan@piratica.us -s "PSA $MYNAME ONLINE"
 # We done 
